@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Loan Data</title>
+        <style>
+            .loan-data {
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Loan Data</h1>
+        <div id="loanData"></div>
+
+        <script>
+            fetch('http://127.0.0.1:8000/loan/display/2/')
+                .then(response => response.json())
+                .then(data => {
+                    let loanDataDiv = document.getElementById('loanData');
+                    for (let key in data) {
+                        let div = document.createElement('div');
+                        div.className = 'loan-data';
+                        div.textContent = `${key}: ${data[key]}`;
+                        loanDataDiv.appendChild(div);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        </script>
+    </body>
+</html>
